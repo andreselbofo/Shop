@@ -37,7 +37,8 @@ namespace Shop.Web.Data
                     LastName = "Yepes",
                     Email = "andresdesarrollo1997@gmail.com",
                     UserName = "andresdesarrollo1997@gmail.com",
-                    PhoneNumber = "3104682576"
+                    PhoneNumber = "3104682576",
+                  
                 };
 
                 var result = await this.userHelper.AddUserAsync(user, "123456");

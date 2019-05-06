@@ -20,7 +20,7 @@ namespace Shop.Web.Controllers.API
         [HttpGet]
         public IActionResult GetProducts()
         {
-            return Ok(productRepository.GetAll());
+            return Ok(productRepository.GetAllWithUsers());
         }
     }
 }
