@@ -3,6 +3,7 @@
 namespace Shop.UIForms.ViewModels
 {
     using GalaSoft.MvvmLight.Command;
+    using Shop.UIForms.Views;
     using System.Windows.Input;
     using Xamarin.Forms;
 
@@ -47,10 +48,14 @@ namespace Shop.UIForms.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Error", "Incorrecto Correo O Contraseña", "Accept");
                 return;
             }
-            await Application.Current.MainPage.DisplayAlert(
-                   "Ok",
-                   "Ingreso",
-                   "Aceptar");
+
+            //await Application.Current.MainPage.DisplayAlert(
+            //       "Ok",
+            //       "Ingreso",
+            //       "Aceptar");
+
+            MainViewModel.GetInstance().Products = new ProductsViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new ProductsPage());
         }
     }
 }
