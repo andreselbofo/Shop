@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Shop.Web.Data.Entities.Especialidad>
+@{
+    ViewData["Title"] = "Create";
+}
+<h2>Create</h2>
+
+<p>
+    <a asp-action="AddProduct" class="btn btn-success">Agregar Cita</a>
+    <a asp-action="ConfirmOrder" class="btn btn-primary">Confirmar Cita</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cita.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicoGeneral)
+            </th>
+            <th>
+               
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cita.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedicoGeneral)
+                </td>
+                <td>
+                   
+                </td>
+                <td>
+                    <a asp-action="Increase" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa fa-plus"></i></a>
+                    <a asp-action="Decrease" asp-route-id="@item.Id" class="btn btn-info"><i class="fa fa-minus"></i></a>
+                    <a asp-action="DeleteItem" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

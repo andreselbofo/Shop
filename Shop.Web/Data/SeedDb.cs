@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Shop.Web.Data
+﻿namespace Shop.Web.Data
 {
     using System;
     using System.Linq;
@@ -28,6 +23,12 @@ namespace Shop.Web.Data
         public async Task SeedAsync()
         {
             await this.context.Database.EnsureCreatedAsync();
+
+            await this.userHelper.CheckRoleAsync("Admin");
+            await this.userHelper.CheckRoleAsync("Customer");
+
+
+            //agregar usuario
             var user = await this.userHelper.GetUserByEmailAsync("andresdesarrollo1997@gmail.com");
             if (user == null)
             {
@@ -46,6 +47,13 @@ namespace Shop.Web.Data
                 {
                     throw new InvalidOperationException("Could not create the user in seeder");
                 }
+                await this.userHelper.AddUserToRoleAsync(user, "Admin");
+            }
+
+            var isInRole = await this.userHelper.IsUserInRoleAsync(user, "Admin");
+            if (!isInRole)
+            {
+                await this.userHelper.AddUserToRoleAsync(user, "Admin");
             }
 
 

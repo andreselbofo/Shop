@@ -12,6 +12,9 @@ namespace Shop.Web
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.IdentityModel.Tokens;
+    using System.Text;
+    using Shop.Web.Data.Repository;
 
     public class Startup
     {
@@ -37,6 +40,19 @@ namespace Shop.Web
             })
 
         .AddEntityFrameworkStores<DataContext>();
+            services.AddAuthentication()
+          .AddCookie()
+          .AddJwtBearer(cfg =>
+          {
+            cfg.TokenValidationParameters = new TokenValidationParameters
+            {
+              ValidIssuer = this.Configuration["Tokens:Issuer"],
+              ValidAudience = this.Configuration["Tokens:Audience"],
+              IssuerSigningKey = new SymmetricSecurityKey(
+                  Encoding.UTF8.GetBytes(this.Configuration["Tokens:Key"]))
+            };
+          });
+
 
             services.AddDbContext<DataContext>(cfg =>
             {
@@ -49,6 +65,10 @@ namespace Shop.Web
 
             services.AddScoped<ICountryRepository, CountryRepository>();
 
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
+            services.AddScoped<IOrdenarRepositori, OrdenarRepositori>();
+
             services.AddScoped<IUserHelper, UserHelper>();
 
 
@@ -58,6 +78,13 @@ namespace Shop.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/NotAuthorized";
+                options.AccessDeniedPath = "/Account/NotAuthorized";
+            });
+
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -75,6 +102,8 @@ namespace Shop.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
