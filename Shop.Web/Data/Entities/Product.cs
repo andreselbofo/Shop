@@ -23,9 +23,12 @@ namespace Shop.Web.Data.Entities
         public string ImageUrl { get; set; }
 
         [Display(Name = "Last Purchase")]
+        [DisplayFormat(DataFormatString = "{0:mm/dd/yyy}", ApplyFormatInEditMode = false)]
         public DateTime LastPurchase { get; set; }
 
         [Display(Name = "Last Sale")]
+        [DisplayFormat(DataFormatString = "{0:mm/dd/yyyy}", ApplyFormatInEditMode = false)]
+      
         public DateTime LastSale { get; set; }
 
         [Display(Name = "Is Availabe?")]

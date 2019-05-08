@@ -110,19 +110,7 @@ namespace Shop.Web.Data.Repository
 
         public IEnumerable<SelectListItem> GetComboCita()
         {
-            var list = this.context.Citas.Select(p => new SelectListItem
-            {
-                Text = p.Especialidad,
-                Value = p.Id.ToString()
-            }).ToList();
-
-            list.Insert(0, new SelectListItem
-            {
-                Text = "(Seleccione una cita...)",
-                Value = "0"
-            });
-
-            return list;
+            throw new System.NotImplementedException();
         }
     }
 }
