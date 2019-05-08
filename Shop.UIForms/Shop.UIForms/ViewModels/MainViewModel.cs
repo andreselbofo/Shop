@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shop.Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,6 +8,8 @@ namespace Shop.UIForms.ViewModels
     public class MainViewModel
     {
         private static MainViewModel instance;
+
+        public TokenResponse Token { get; set; }
         public LoginViewModel Login { get; set; }
 
         public  ProductsViewModel Products { get; set; }
