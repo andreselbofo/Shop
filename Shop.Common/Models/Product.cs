@@ -34,7 +34,7 @@ namespace Shop.Common.Models
         public User User { get; set; }
 
         [JsonProperty("imageFullPath")]
-        public Uri ImageFullPath { get; set; }
+        public string ImageFullPath { get; set; }
 
         public override string ToString()
         {

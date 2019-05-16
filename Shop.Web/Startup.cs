@@ -30,9 +30,8 @@ namespace Shop.Web
         {
             services.AddIdentity<User, IdentityRole>(cfg =>
             {
-                cfg.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
-                cfg.SignIn.RequireConfirmedEmail = true;
-
+                //cfg.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
+                //cfg.SignIn.RequireConfirmedEmail = true;
                 cfg.User.RequireUniqueEmail = true;
                 cfg.Password.RequireDigit = false;
                 cfg.Password.RequiredUniqueChars = 0;
@@ -41,8 +40,10 @@ namespace Shop.Web
                 cfg.Password.RequireUppercase = false;
                 cfg.Password.RequiredLength = 6;
             })
-            .AddDefaultTokenProviders()
+
+            //.AddDefaultTokenProviders()
            .AddEntityFrameworkStores<DataContext>();
+
             services.AddAuthentication()
           .AddCookie()
           .AddJwtBearer(cfg =>
@@ -73,6 +74,7 @@ namespace Shop.Web
             services.AddScoped<IOrdenarRepositori, OrdenarRepositori>();
 
             services.AddScoped<IUserHelper, UserHelper>();
+
             services.AddScoped<IMailHelper, MailHelper>();
 
 

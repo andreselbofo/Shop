@@ -2,8 +2,76 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Shop.UIForms.Views.ProductsPage" 
-             BindingContext="{Binding Main, Source={StaticResource Locator}}"
-         	Title="Products">
+                BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Inicio">
+    <ContentPage.Content>
+        <StackLayout
+            BackgroundColor="White"
+             BindingContext="{Binding Inicio}">
+            <Image
+                	HeightRequest="150"
+                	Source="LOGO2">
+            </Image>
+
+            <Grid
+                HorizontalOptions="Center">
+                <Grid.ColumnDefinitions
+                    >
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                    	Grid.Row="0"
+                        Text="Agendar Cita" 
+                        ContentLayout="Bottom,0" 
+                        Image="calendario"  
+                        Clicked="AgendarBtn"
+                        WidthRequest="200"
+                        BackgroundColor="White"
+                        Margin="15"
+                        Padding="10"/>
+                
+                <Button Grid.Column="1"
+                    	Grid.Row="0"
+                        Text="Consultar Cita" 
+                        ContentLayout="Bottom,0" 
+                        Image="busquedad"  
+                        Clicked="ConsultarBtn"
+                        WidthRequest="200"
+                        BackgroundColor="White"
+                        Margin="15"
+                        Padding="10"
+                       />
+                
+                <Button Grid.Column="0"
+                    	Grid.Row="1"
+                        Text="Mapa" 
+                        ContentLayout="Bottom,0" 
+                        Image="map"  
+                        Margin="15"
+                        Padding="10"
+                        WidthRequest="200"
+                        BackgroundColor="White"
+                       />
+                
+                <Button Grid.Column="1"
+                    	Grid.Row="1"
+                        Text="información" 
+                        ContentLayout="Bottom,0" 
+                        Image="info"  
+                        WidthRequest="200"
+                        BackgroundColor="White"
+                        Margin="15"
+                        Padding="10"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+    
+    
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_action_add_circle" Command="{Binding AddProductCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
            BindingContext="{Binding Products}"
@@ -50,5 +118,5 @@
 
             </ListView>
          </StackLayout>
-    </ContentPage.Content>
+    </ContentPage.Content>-->
 </ContentPage>

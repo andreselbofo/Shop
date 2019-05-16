@@ -3,6 +3,8 @@ namespace Shop.UIForms.ViewModels
 {
     using Shop.Common.Models;
     using Shop.Common.Services;
+    using Shop.UIForms.Views;
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Xamarin.Forms;
@@ -23,7 +25,7 @@ namespace Shop.UIForms.ViewModels
             set { this.SetValue(ref this.isRefreshing, value); }
         }
 
-
+       
         public ProductsViewModel()
         {
             this.apiService = new ApiService();
@@ -34,24 +36,31 @@ namespace Shop.UIForms.ViewModels
         {
             this.IsRefreshing = true;
 
-            var response = await this.apiService.GetListAsync<Product>
-                (
-                  "https://shopces.azurewebsites.net",
-                  "/api",
-                  "/Products"
-                );
-            this.IsRefreshing = false;
+            var url = Application.Current.Resources["UrlAPI"].ToString();
+            var response = await this.apiService.GetListAsync<Product>(
+                url,
+                "/api",
+                "/Products",
+                "bearer",
+                MainViewModel.GetInstance().Token.Token);
+
+
 
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
                     response.Message,
-                    "Aceptar");
+                    "Accept");
+                this.IsRefreshing = false;
                 return;
             }
-            var myProducts = (List<Product>)response.Result;
-            this.Products = new ObservableCollection<Product>(myProducts);
+
+            var products = (List<Product>)response.Result;
+            this.Products = new ObservableCollection<Product>(products);
+            this.IsRefreshing = false;
+
+            //this.Products = new ObservableCollection<Product>(myProducts.OrderBy(p => p.Name));
         }
     }
 }

@@ -26,12 +26,14 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Email)
                             </th>
-
+                           
                             <th>
                                 @Html.DisplayNameFor(model => model.PhoneNumber)
                             </th>
-
                            
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsAdmin)
+                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.EmailConfirmed)
                             </th>
@@ -51,17 +53,27 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Email)
                                 </td>
-
+                               
                                 <td>
                                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                                 </td>
-
-                               
+                              
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsAdmin)
+                                </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.EmailConfirmed)
                                 </td>
                                 <td>
-                                   
+                                    <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Delete</button>
+                                    @if (item.IsAdmin)
+                                    {
+                                        <a asp-action="AdminOff" asp-route-id="@item.Id" class="btn btn-warning">Admin Off</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="AdminOn" asp-route-id="@item.Id" class="btn btn-primary">Admin On</a>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -110,6 +122,5 @@
                 window.location.href = '/Account/DeleteUser/' + item_to_delete;
             });
         });
-
     </script>
 }

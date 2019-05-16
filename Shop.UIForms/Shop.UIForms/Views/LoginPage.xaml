@@ -6,33 +6,74 @@
              Title="Login">
     <ContentPage.Content>
         <ScrollView 
+             BackgroundColor="White"
             BindingContext="{Binding Login}">
             <StackLayout
-            	Padding="5">
+                
+            	Padding="10">
+                <Image
+                	HeightRequest="150"
+                	Source="LOGO2"
+                    BackgroundColor="White">
+                </Image>
+
                 <Label
-                	Text="Email">
+                   HorizontalOptions="CenterAndExpand"
+                    Font="20"
+                	Text="Correo">
                 </Label>
                 <Entry
                 	Keyboard="Email"
-                	Placeholder="Enter your email..."
+                	Placeholder="Introduce tu correo electrónico..."
                 	Text="{Binding Email}">
                 </Entry>
                 <Label
-                	Text="Password">
+                    Font="20"
+                    HorizontalOptions="CenterAndExpand"
+                	Text="Contraseña">
                 </Label>
                 <Entry
                 	IsPassword="True"
-                	Placeholder="Enter your password..."
+                	Placeholder="Introduce tu contraseña..."
                 	Text="{Binding Password}">
                 </Entry>
+                <Label
+	                HorizontalOptions="Center"
+	                Text="Olvidé mi contraseña"
+	                TextColor="Navy">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RememberPasswordCommand }"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
                 <ActivityIndicator
-                	IsRunning="{Binding IsRunning}">
+                	IsRunning="{Binding IsRunning}"
+                    VerticalOptions="CenterAndExpand">
                 </ActivityIndicator>
-                <Button
+                <StackLayout
+	                  Orientation="Horizontal">
+                    <Button
+                	BackgroundColor="#2E9AFE"
+                	BorderRadius="23"
                 	Command="{Binding LoginCommand}"
-                    IsEnabled="{Binding IsEnabled}"
-                    Text="Login">
-                </Button>
+                	HeightRequest="46"
+                	IsEnabled="{Binding IsEnabled}"
+                	Text="Login"
+                	TextColor="White">
+                    </Button>
+
+                    <Button
+    	               BackgroundColor="#2E9AFE"
+    	               BorderRadius="23"
+    	               Command="{Binding RegisterCommand}"
+    	               HeightRequest="46"
+    	               HorizontalOptions="FillAndExpand"
+                       IsEnabled="{Binding IsEnabled}"
+    	               Text=" Registrarse"
+    	               TextColor="White">
+                    </Button>
+                </StackLayout>
+
             </StackLayout>
 
         </ScrollView>

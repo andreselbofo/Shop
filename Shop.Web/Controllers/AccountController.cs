@@ -1,10 +1,12 @@
 ﻿
 namespace Shop.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.IdentityModel.Tokens;
+    using Shop.Common.Models;
     using Shop.Web.Data.Entities;
     using Shop.Web.Helpers;
     using Shop.Web.Models;
@@ -74,7 +76,7 @@ namespace Shop.Web.Controllers
                 var user = await this.userHelper.GetUserByEmailAsync(model.Username);
                 if (user == null)
                 {
-                    user = new User
+                    user = new Data.Entities.User
                     {
                         FirstName = model.FirstName,
                         LastName = model.LastName,
@@ -89,21 +91,21 @@ namespace Shop.Web.Controllers
                         return this.View(model);
                     }
 
-                    var myToken = await this.userHelper.GenerateEmailConfirmationTokenAsync(user);
-                    var tokenLink = this.Url.Action("ConfirmEmail", "Account", new
+                   // var myToken = await this.userHelper.GenerateEmailConfirmationTokenAsync(user);
+                    var tokenLink = this.Url.Action("ConfirmaEmail", "Account", new
                     {
                         userid = user.Id,
-                        token = myToken
+                        //token = myToken
                     }, protocol: HttpContext.Request.Scheme);
 
                     this.mailHelper.SendMail(model.Username, "Email confirmacion", $"<h1>Citas Email Confirmacion</h1>" +
                         $"To allow the user, " +
-                        $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
+                        $"click en este enlace:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
                     this.ViewBag.Message = "Las instrucciones para permitir que su usuario haya sido enviado a correo electrónico..";
                     return this.View(model);
                 }
 
-                this.ModelState.AddModelError(string.Empty, "The username is already registered.");
+                this.ModelState.AddModelError(string.Empty, "El nombre de usuario ya está registrado.");
             }
 
             return this.View(model);
@@ -270,10 +272,10 @@ namespace Shop.Web.Controllers
                     "ResetPassword",
                     "Account",
                     new { token = myToken }, protocol: HttpContext.Request.Scheme);
-                this.mailHelper.SendMail(model.Email, "Shop Password Reset", $"<h1>Shop Password Reset</h1>" +
-                    $"To reset the password click in this link:</br></br>" +
+                this.mailHelper.SendMail(model.Email, "Restablecer contraseña", $"<h1>Restablecer contraseña</h1>" +
+                    $"Para restablecer la contraseña, haga clic en este enlace:</br></br>" +
                     $"<a href = \"{link}\">Reset Password</a>");
-                this.ViewBag.Message = "The instructions to recover your password has been sent to email.";
+                this.ViewBag.Message = "Las instrucciones para recuperar su contraseña han sido enviadas a un correo electrónico.";
                 return this.View();
 
             }
@@ -295,16 +297,85 @@ namespace Shop.Web.Controllers
                 var result = await this.userHelper.ResetPasswordAsync(user, model.Token, model.Password);
                 if (result.Succeeded)
                 {
-                    this.ViewBag.Message = "Password reset successful.";
+                    this.ViewBag.Message = "Contraseña restablecida exitosa.";
                     return this.View();
                 }
 
-                this.ViewBag.Message = "Error while resetting the password.";
+                this.ViewBag.Message = "Error al restablecer la contraseña.";
                 return View(model);
             }
 
-            this.ViewBag.Message = "User not found.";
+            this.ViewBag.Message = "Usuario no encontrado.";
             return View(model);
         }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Index()
+        {
+            var users = await this.userHelper.GetAllUsersAsync();
+            foreach (var user in users)
+            {
+                var myUser = await this.userHelper.GetUserByIdAsync(user.Id);
+                if (myUser != null)
+                {
+                    user.IsAdmin = await this.userHelper.IsUserInRoleAsync(myUser, "Admin");
+                }
+            }
+
+            return this.View(users);
+        }
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AdminOff(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await this.userHelper.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await this.userHelper.RemoverUserFromRoleAsync(user, "Admin");
+            return this.RedirectToAction(nameof(Index));
+        }
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AdminOn(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await this.userHelper.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await this.userHelper.AddUserToRoleAsync(user, "Admin");
+            return this.RedirectToAction(nameof(Index));
+        }
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await this.userHelper.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await this.userHelper.DeleteUserAsync(user);
+            return this.RedirectToAction(nameof(Index));
+        }
+
+
     }
 }
