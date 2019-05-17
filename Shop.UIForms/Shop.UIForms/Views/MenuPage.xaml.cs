@@ -16,5 +16,18 @@ namespace Shop.UIForms.Views
         {
             InitializeComponent();
         }
+        private double width = 0;
+        private double height = 0;
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height); //must be called
+            if (this.width != width || this.height != height)
+            {
+                this.width = width;
+                this.height = height;
+                //reconfigure layout
+            }
+        }
     }
 }

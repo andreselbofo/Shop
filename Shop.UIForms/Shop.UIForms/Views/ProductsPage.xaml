@@ -23,6 +23,7 @@
 
                 <Button Grid.Column="0"
                     	Grid.Row="0"
+                        TextColor="Black"
                         Text="Agendar Cita" 
                         ContentLayout="Bottom,0" 
                         Image="calendario"  
@@ -34,6 +35,7 @@
                 
                 <Button Grid.Column="1"
                     	Grid.Row="0"
+                        TextColor="Black"
                         Text="Consultar Cita" 
                         ContentLayout="Bottom,0" 
                         Image="busquedad"  
@@ -47,6 +49,7 @@
                 <Button Grid.Column="0"
                     	Grid.Row="1"
                         Text="Mapa" 
+                        TextColor="Black"
                         ContentLayout="Bottom,0" 
                         Image="map"  
                         Margin="15"
@@ -57,9 +60,11 @@
                 
                 <Button Grid.Column="1"
                     	Grid.Row="1"
+                        TextColor="Black"
                         Text="información" 
                         ContentLayout="Bottom,0" 
                         Image="info"  
+                        Clicked="Infobtn"
                         WidthRequest="200"
                         BackgroundColor="White"
                         Margin="15"

@@ -19,6 +19,7 @@
                     	Grid.Column="0"
                     	Grid.Row="0"
                     	Text="Nombre"
+                        TextColor="Black"
                     	VerticalOptions="Center">
                 	</Label>
                 	<Entry
@@ -30,6 +31,7 @@
                 	<Label
                     	Grid.Column="0"
                     	Grid.Row="1"
+                        TextColor="Black"
                     	Text="Apellido"
                     	VerticalOptions="Center">
                 	</Label>
@@ -43,6 +45,7 @@
                     	Grid.Column="0"
                     	Grid.Row="2"
                     	Text="Correo"
+                        TextColor="Black"
                     	VerticalOptions="Center">
                 	</Label>
                 	<Entry
@@ -57,18 +60,20 @@
                     	Grid.Column="0"
                     	Grid.Row="3"
                     	Text="Contraseña"
+                        TextColor="Black"
                     	VerticalOptions="Center">
                 	</Label>
                 	<Entry
                     	Grid.Column="1"
                     	Grid.Row="3"
                     	IsPassword="True"
-                    	Placeholder="Enter your password..."
+                    	Placeholder="Ingrese Contraseña..."
                     	Text="{Binding Password}">
                 	</Entry>
                 	<Label
                     	Grid.Column="0"
                     	Grid.Row="4"
+                        TextColor="Black"
                     	Text="Confirmar Contraseña"
                     	VerticalOptions="Center">
                 	</Label>
@@ -76,7 +81,7 @@
                     	Grid.Column="1"
                     	Grid.Row="4"
                     	IsPassword="True"
-                    	Placeholder="Enter your password confirm..."
+                    	Placeholder="Confirmar Contraseña..."
                     	Text="{Binding Confirm}">
                 	</Entry>
             	</Grid>
@@ -86,8 +91,8 @@
             	</ActivityIndicator>
             	<Button
                 	BackgroundColor="#2E9AFE"
-                	BorderRadius="23"
-                	Command="{Binding RegisterCommand}"
+                	BorderRadius="10"
+                    Command="{Binding RegisterCommand}"
                 	HeightRequest="46"
                 	HorizontalOptions="FillAndExpand"
                 	IsEnabled="{Binding IsEnabled}"

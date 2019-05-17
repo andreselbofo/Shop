@@ -2,23 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
          	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
          	x:Class="Shop.UIForms.Views.AboutPage"
-         	Title="Cita"
-             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
-         >
+         	Title="Consultar Cita"
+            xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms">
     <ContentPage.Content>
         <StackLayout
             BackgroundColor="White"
            Orientation="Vertical"
-             >
-            <Label
-                Text="Consultar Cita">
-                
-            </Label>
+           >
             <controls:CheckBox DefaultText="Medico General 15/05/2019 12:15 PM"
                                HorizontalOptions="FillAndExpand"
                                FontSize="18"
-                               x:Name="MedicoGeneral"
-                               FontName="AmericanTypewriter">
+                               Checked="True"
+                               FontName="AmericanTypewriter"
+                               >
             </controls:CheckBox>
             <controls:CheckBox DefaultText="Odontologia 25/6/2019 10:00 AM "
                                HorizontalOptions="FillAndExpand"
@@ -33,16 +29,17 @@
                                FontName="AmericanTypewriter">
             </controls:CheckBox>
             <Button
-                	BackgroundColor="Navy"
-                	BorderRadius="23"
+                   Margin="40"
+                	BackgroundColor="#2E9AFE"
+                	BorderRadius="10"
                 	Clicked="Eliminarbtn"
                 	HeightRequest="46"
                 	IsEnabled="{Binding IsEnabled}"
-                
-                	Text="Eliminar Cita"
+                    Text="Eliminar Cita"
                 	TextColor="White">
                 <!---Command="{Binding EliminarCommand}"-->
             </Button>
         </StackLayout>
+     
     </ContentPage.Content>
 </ContentPage>

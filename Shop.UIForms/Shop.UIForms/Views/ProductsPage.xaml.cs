@@ -19,6 +19,19 @@ namespace Shop.UIForms.Views
         {
             InitializeComponent();
         }
+        private double width = 0;
+        private double height = 0;
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height); //must be called
+            if (this.width != width || this.height != height)
+            {
+                this.width = width;
+                this.height = height;
+                //reconfigure layout
+            }
+        }
         private async void AgendarBtn(object sender, EventArgs e)
         {
             await App.Navigator.PushAsync(new SetupPage());
@@ -26,6 +39,10 @@ namespace Shop.UIForms.Views
         private async void ConsultarBtn(object sender, EventArgs e)
         {
             await App.Navigator.PushAsync(new AboutPage()); 
+        }
+        private async void Infobtn(object sender, EventArgs e)
+        {
+            await App.Navigator.PushAsync(new InicioPage());
         }
 
     }

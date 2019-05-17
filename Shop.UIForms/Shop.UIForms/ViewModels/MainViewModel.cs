@@ -1,15 +1,12 @@
-﻿using GalaSoft.MvvmLight.Command;
-using Shop.Common.Models;
-using Shop.UIForms.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-
+﻿
 namespace Shop.UIForms.ViewModels
 {
+    using GalaSoft.MvvmLight.Command;
+    using Shop.Common.Models;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Windows.Input;
     public class MainViewModel
     {
         private static MainViewModel instance;
@@ -55,25 +52,25 @@ namespace Shop.UIForms.ViewModels
         {
             var menus = new List<Menu>
         {
-        new Menu
-        {
-            Icon = "ic_action_assignment",
-            PageName = "AboutPage",
-            Title = "Consultar Cita"
-        },
+        ////new Menu
+        //{
+        //    Icon = "ic_action_assignment",
+        //    PageName = "AboutPage",
+        //    Title = "Consultar Cita"
+        //},
 
-        new Menu
-        {
-            Icon = "ic_action_search",
-            PageName = "SetupPage",
-            Title = "Agendar Cita"
-        },
+        //new Menu
+        //{
+        //    Icon = "ic_action_search",
+        //    PageName = "SetupPage",
+        //    Title = "Agendar Cita"
+        //},
 
         new Menu
         {
             Icon = "ic_exit_to_app",
             PageName = "LoginPage",
-            Title = "Close session"
+            Title = "Cerrar session"
         }
     };
 

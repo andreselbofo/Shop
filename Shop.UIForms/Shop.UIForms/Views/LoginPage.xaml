@@ -20,6 +20,7 @@
                 <Label
                    HorizontalOptions="CenterAndExpand"
                     Font="20"
+                    TextColor="Black"
                 	Text="Correo">
                 </Label>
                 <Entry
@@ -29,6 +30,7 @@
                 </Entry>
                 <Label
                     Font="20"
+                    TextColor="Black"
                     HorizontalOptions="CenterAndExpand"
                 	Text="Contraseña">
                 </Label>
@@ -54,7 +56,7 @@
 	                  Orientation="Horizontal">
                     <Button
                 	BackgroundColor="#2E9AFE"
-                	BorderRadius="23"
+                	BorderRadius="10"
                 	Command="{Binding LoginCommand}"
                 	HeightRequest="46"
                 	IsEnabled="{Binding IsEnabled}"
@@ -64,7 +66,7 @@
 
                     <Button
     	               BackgroundColor="#2E9AFE"
-    	               BorderRadius="23"
+    	               BorderRadius="10"
     	               Command="{Binding RegisterCommand}"
     	               HeightRequest="46"
     	               HorizontalOptions="FillAndExpand"

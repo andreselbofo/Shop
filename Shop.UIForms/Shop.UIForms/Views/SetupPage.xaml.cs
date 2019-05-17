@@ -1,16 +1,12 @@
-﻿using Shop.UIForms.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using XLabs.Forms.Controls;
-
+﻿
 namespace Shop.UIForms.Views
 {
+    using Shop.UIForms.ViewModels;
+    using System;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+    using XLabs.Forms.Controls;
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SetupPage : ContentPage
     {
